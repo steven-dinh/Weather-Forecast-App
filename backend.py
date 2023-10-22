@@ -1,12 +1,16 @@
 import requests
+import streamlit as st
 API_KEY = "8e41178896564cda8f6141549232210"
 
-def get_data(place="Tokyo", forecast_days=1, kind="Temperature"):
+def get_data(place=None, forecast_days=1, kind="Temperature"):
+    if not place:
+        return None
     url = f"http://api.weatherapi.com/v1/forecast.json?key={API_KEY}&q={place}&days={forecast_days}"
 
     response = requests.get(url)
     content = response.json()
     date = []
+
     if "forecast" in content:
         content_filtered = content["forecast"]
 
@@ -42,6 +46,8 @@ def get_data(place="Tokyo", forecast_days=1, kind="Temperature"):
                 print(sky_icon)
             return date, sky_icon
     return None
+
+
 
 
 if __name__=="__main__":

@@ -11,18 +11,26 @@ option = st.selectbox("Select data to view",
                       ("Temperature", "Wind", "Sky"))
 st.subheader(f"{option} for the next {days} days in {place}")
 
-print(get_data(place, days, option))
+
 
 if place:
-    if option == "Temperature" or option == "Wind":
-        d, t = get_data(place, days, option)
-        unit = "C" if option == "Temperature" else "KPH"
+    error_shown = False
+    while True:
+        place_data = get_data(place, days, option)
+        if place_data is not None:
+            break
+        if not error_shown:
+            st.error("Invalid Location")
+            error_shown = True
 
+    if option == "Temperature" or option == "Wind":
+        unit = "C" if option == "Temperature" else "KPH"
+        d, t = get_data(place, days, option)
         figure = px.line(x=d, y=t, labels={"x": "Date", "y": f"{option} ({unit})"})
         st.plotly_chart(figure)
 
     elif option == "Sky":
         date, sky_icons = get_data(place, days, option)
-        cols = st.columns(len(sky_icons))
+        cols = st.columns(len(sky_icons),)
         for i in range(len(sky_icons)):
-            cols[i].image(sky_icons[i], caption=date[i],width=115)
+            cols[i].image(sky_icons[i], caption=date[i], width=50)
