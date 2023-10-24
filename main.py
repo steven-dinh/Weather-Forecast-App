@@ -6,6 +6,7 @@ st.title("Weather Forecast for the Next Days")
 default_place = "Tokyo"
 place = st.text_input("Place: ", default_place)
 
+# set max value to 3 if api plan is not pro
 days = st.slider("Forecast Days", min_value=1, max_value=14,
                  help="Select the number of days to be displayed")
 option = st.selectbox("Select data to view",

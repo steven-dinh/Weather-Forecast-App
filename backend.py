@@ -1,6 +1,6 @@
 import requests
 API_KEY = ""
-
+# api used from www.weatherapi.com input your own api key ^
 def get_data(place=None, forecast_days=1, kind="Temperature"):
     if not place:
         return None
