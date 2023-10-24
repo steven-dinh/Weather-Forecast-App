@@ -1,6 +1,6 @@
 import requests
 import streamlit as st
-API_KEY = "8e41178896564cda8f6141549232210"
+API_KEY = ""
 
 def get_data(place=None, forecast_days=1, kind="Temperature"):
     if not place:
