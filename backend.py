@@ -1,5 +1,4 @@
 import requests
-import streamlit as st
 API_KEY = ""
 
 def get_data(place=None, forecast_days=1, kind="Temperature"):
